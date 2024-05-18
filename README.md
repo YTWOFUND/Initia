@@ -106,7 +106,8 @@ fi
 
 # enable and start service
 ```
-sudo systemctl start initia.service && sudo journalctl -u initia.service -f --no-hostname -o cat
+sudo systemctl start initiad.service
+sudo journalctl -u initiad.service -f --no-hostname -o cat
 ```
 
 ### Becoming a Validator
@@ -189,12 +190,5 @@ initiad tx mstaking delegate $(initiad keys show wallet --bech val -a) 1000000ui
 REMOVE NODE
 Please, before proceeding with the next step! All chain data will be lost! Make sure you have backed up your priv_validator_key.json!
 ```
-cd $HOME
-sudo systemctl stop initia.service
-sudo systemctl disable initia.service
-sudo rm /etc/systemd/system/initia.service
-sudo systemctl daemon-reload
-rm -f $(which initiad)
-rm -rf $HOME/.initia
-rm -rf $HOME/initia
+sudo systemctl stop initiad && sudo systemctl disable initiad && sudo rm /etc/systemd/system/initiad.service && sudo systemctl daemon-reload && rm -rf $HOME/.initia && rm -rf initia && sudo rm -rf $(which initiad) 
 ```
