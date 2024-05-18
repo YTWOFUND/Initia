@@ -32,14 +32,14 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt-get install libclang-dev
 sudo apt install -y unzip logrotate git jq sed wget curl coreutils systemd
+sudo apt install -y curl git jq lz4 build-essential
 ```
 ### Go installation.
 ```
 sudo rm -rf /usr/local/go
-curl -Ls https://go.dev/dl/go1.21.10.linux-amd64.tar.gz | sudo tar -xzf - -C /usr/local
-eval $(echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee /etc/profile.d/golang.sh)
-eval $(echo 'export PATH=$PATH:$HOME/go/bin' | tee -a $HOME/.profile)
-go version
+curl -L https://go.dev/dl/go1.21.6.linux-amd64.tar.gz | sudo tar -xzf - -C /usr/local
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> $HOME/.bash_profile
+source .bash_profile
 ```
 
 ### Download and build binaries
