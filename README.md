@@ -77,27 +77,21 @@ sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.initia/config/config.toml
 
 # Create service file
 ```
-sudo tee /etc/systemd/system/initia.service > /dev/null << EOF
+sudo tee /etc/systemd/system/initiad.service > /dev/null << EOF
 [Unit]
-Description=initia node service
+Description=Initia node service
 After=network-online.target
-
 [Service]
 User=$USER
-ExecStart=$(which cosmovisor) run start
+ExecStart=$(which initiad) start
 Restart=on-failure
 RestartSec=10
 LimitNOFILE=65535
-Environment="DAEMON_HOME=$HOME/.initia"
-Environment="DAEMON_NAME=initiad"
-Environment="UNSAFE_SKIP_BACKUP=true"
-Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:$HOME/.initia/cosmovisor/current/bin"
-
 [Install]
 WantedBy=multi-user.target
 EOF
 sudo systemctl daemon-reload
-sudo systemctl enable initia.service
+sudo systemctl enable initiad.service
 ```
 
 # Reset and download snapshot
