@@ -42,39 +42,24 @@ eval $(echo 'export PATH=$PATH:$HOME/go/bin' | tee -a $HOME/.profile)
 go version
 ```
 
-# Set vars
-```
-MONIKER="YOUR_MONIKER_GOES_HERE"
-```
-
 ### Download and build binaries
 ```
-cd $HOME
-rm -rf initia
-git clone https://github.com/initia-labs/initia.git
+cd && rm -rf initia
+git clone https://github.com/initia-labs/initia
 cd initia
 git checkout v0.2.14
-make build
-mkdir -p $HOME/.initia/cosmovisor/genesis/bin
-mv build/initiad $HOME/.initia/cosmovisor/genesis/bin/
-rm -rf build
-sudo ln -s $HOME/.initia/cosmovisor/genesis $HOME/.initia/cosmovisor/current -f
-sudo ln -s $HOME/.initia/cosmovisor/current/bin/initiad /usr/local/bin/initiad -f
-go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
+make install
 ```
 
 # Config and init app
 ```
-initiad config set client chain-id initiation-1
-initiad config set client keyring-backend test
-initiad config set client node tcp://localhost:17957
-initiad init $MONIKER --chain-id initiation-1
+initiad init "your moniker" --chain-id initiation-1
 ```
 
 # Download genesis and addrbook
 ```
-curl -Ls https://snapshots.kjnodes.com/initia-testnet/genesis.json > $HOME/.initia/config/genesis.json
-curl -Ls https://snapshots.kjnodes.com/initia-testnet/addrbook.json > $HOME/.initia/config/addrbook.json
+curl -L https://snapshots-testnet.nodejumper.io/initia-testnet/genesis.json > $HOME/.initia/config/genesis.json
+curl -L https://snapshots-testnet.nodejumper.io/initia-testnet/addrbook.json > $HOME/.initia/config/addrbook.json
 ```
 
 # Set seeds and peers
