@@ -47,7 +47,7 @@ source .bash_profile
 cd && rm -rf initia
 git clone https://github.com/initia-labs/initia
 cd initia
-git checkout v0.2.15
+git checkout v0.2.21
 make install
 ```
 
@@ -154,10 +154,25 @@ initiad tx mstaking create-validator \
 
 ### Update
 ```
-No update
+cd && rm -rf initia
+git clone https://github.com/initia-labs/initia
+cd initia
+git checkout v0.2.15
+
+make install
+
+initiad tendermint unsafe-reset-all --home $HOME/.initia
+if curl -s --head curl https://testnet-files.itrocket.net/initia/snap_initia.tar.lz4 | head -n 1 | grep "200" > /dev/null; then
+  curl https://testnet-files.itrocket.net/initia/snap_initia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.initia
+    else
+  echo no have snap
+fi
+
+sudo systemctl restart initiad
+sudo journalctl -u initiad -f --no-hostname -o cat
 
 Current network:initiation-1
-Current version:v0.2.14
+Current version:v0.2.21
 ```
 
 ### Useful commands
