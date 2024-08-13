@@ -47,7 +47,7 @@ source .bash_profile
 cd && rm -rf initia
 git clone https://github.com/initia-labs/initia
 cd initia
-git checkout v0.2.21
+git checkout v0.2.23-stage-2
 make install
 ```
 
@@ -157,7 +157,7 @@ initiad tx mstaking create-validator \
 cd && rm -rf initia
 git clone https://github.com/initia-labs/initia
 cd initia
-git checkout v0.2.21
+git checkout v0.2.23-stage-2
 
 make install
 
@@ -172,7 +172,7 @@ sudo systemctl restart initiad
 sudo journalctl -u initiad -f --no-hostname -o cat
 
 Current network:initiation-1
-Current version:v0.2.21
+Current version:v0.2.23-stage-2
 ```
 
 ### Useful commands
